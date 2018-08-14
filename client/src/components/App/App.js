@@ -66,29 +66,41 @@ class App extends Component {
             //   console.log(test)
           }
           
-          deleteCondition(e) {
-            const inputCreate = document.querySelector("#condition").value
-            const send = {condition: inputCreate}
+          deleteCondition() {
+            const inputCreate = document.querySelector("#delete").value
 
-            console.log(e)
-            console.log("In Delete Condition, Front end")
+            axios.delete("http://localhost:3001/delete", {
+                condition: inputCreate
+              })
+              .then(() => {
+                this.props.history.push('/translations')
+              })
+              .catch((err) => {
+                console.log(err)
+              })
+
+            // const inputCreate = document.querySelector("#condition").value
+            // const send = {condition: inputCreate}
+
+            // console.log(e)
+            // console.log("In Delete Condition, Front end")
             
-            if(!inputCreate) {
-                console.log("You haven't entered anything!")
-            }
-            else {
-                console.log(inputCreate)
-            }
+            // if(!inputCreate) {
+            //     console.log("You haven't entered anything!")
+            // }
+            // else {
+            //     console.log(inputCreate)
+            // }
             
 
-            fetch("http://localhost:3001/create", {
-                method: 'POST',
-                body: JSON.stringify(send)
-              }).then(res => res.json())
-              .catch(error => console.error('Error:', error))
-              .then(response => console.log('Success:', response));
+            // fetch("http://localhost:3001/create", {
+            //     method: 'POST',
+            //     body: JSON.stringify(send)
+            //   }).then(res => res.json())
+            //   .catch(error => console.error('Error:', error))
+            //   .then(response => console.log('Success:', response));
             
-            debugger
+            // debugger
           }
 
           createCondition() {

@@ -47,8 +47,12 @@ app.get('/', (req, res) => {
     res.redirect('/')
   })
 
-  app.get('/delete', (req, res) => {
-    res.send("This is delete")
+  app.delete('/delete', (req, res) => {
+    console.log("In delete route")
+    Conditions.deleteOne(req.body)
+        .then(data => {
+            res.redirect('/show');
+        })
   })
 
   app.get('/api/hello', (req, res) => {
