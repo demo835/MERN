@@ -66,6 +66,20 @@ class App extends Component {
             //   console.log(test)
           }
           
+          updateCondition() {
+            const inputCreate = document.querySelector("#update").value
+
+            axios.put("http://localhost:3001/update", {
+                condition: inputCreate
+              })
+              .then(() => {
+                this.props.history.push('/translations')
+              })
+              .catch((err) => {
+                console.log(err)
+              })
+          }
+          
           deleteCondition() {
             const inputCreate = document.querySelector("#delete").value
 

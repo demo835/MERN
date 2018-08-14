@@ -43,9 +43,23 @@ app.get('/', (req, res) => {
     // res.redirect('/show')
   })
 
-  app.get('/update', (req, res) => {
-    res.redirect('/')
-  })
+  app.put('/update', (req, res) => {
+        var id = req.params.id;
+        console.log("The ID is...")
+        console.log(id);
+        Script.findById(id, function(err, doc) {
+            if (err) {
+            console.error("Error editing - no entry found with this Id");
+            res.redirect("/script")
+            }
+            doc.name = req.body.name;
+            doc.sport = req.body.sport;
+            doc.description = req.body.description;
+            doc.skeleton = req.body.skeleton;
+            doc.save();
+        })
+            res.redirect("/script");
+    })
 
   app.delete('/delete', (req, res) => {
     console.log("In delete route")
