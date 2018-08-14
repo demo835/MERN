@@ -1,8 +1,11 @@
 const express = require('express')
 const parser = require('body-parser')
 const cors = require('cors')
-// const mongoose = require('./db/schema.js')
-// const Translation = mongoose.model('Translation')
+//const mongoose = require('./db/schema')
+// const mongoose = require("./db/connection")
+// const Conditions = mongoose.model('./db/model')
+const mongoose = require('./db/schema.js')
+const Conditions = mongoose.model('Conditions')
 
 const app = express()
 
@@ -14,9 +17,9 @@ app.get('/', (req, res) => {
     res.send("This is a test")
   })
 
-  app.get('/show', (req, res) => {
-    res.send("This is show")
-  })
+//   app.get('/show', (req, res) => {
+//     res.send("This is show")
+//   })
 
   app.get('/create', (req, res) => {
     res.send("This is a create")
@@ -34,6 +37,16 @@ app.get('/', (req, res) => {
     res.send({ express: 'Hello From Express' });
   });
   
+  app.get('/show', (req, res) => {
+    Conditions.find({})
+      .then(data => {
+        console.log(data)
+        res.json(data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  })
 
 // app.get('/api/translations', (req, res) => {
 //   Translation.find()

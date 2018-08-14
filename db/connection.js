@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect("mongodb://localhost/api-translations");
+mongoose.connect("mongodb://localhost/cerner");
 
 mongoose.Promise = Promise
 
