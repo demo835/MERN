@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 class App extends Component {
     constructor() {
@@ -64,32 +65,104 @@ class App extends Component {
             //   let test = this.state.response
             //   console.log(test)
           }
-        
-          createCondition() {
+          
+          deleteCondition(e) {
+            const inputCreate = document.querySelector("#condition").value
+            const send = {condition: inputCreate}
 
-          }
-        //   callApi = async () => {
-        //     const response = await fetch('http://localhost:3001/show');
-        //     const body = await response.json();
-        
-        //     if (response.status !== 200)
-        //     {
-        //         console.log(body.message);
-        //     }
+            console.log(e)
+            console.log("In Delete Condition, Front end")
             
-        //     return body;
-        //   };
+            if(!inputCreate) {
+                console.log("You haven't entered anything!")
+            }
+            else {
+                console.log(inputCreate)
+            }
+            
+
+            fetch("http://localhost:3001/create", {
+                method: 'POST',
+                body: JSON.stringify(send)
+              }).then(res => res.json())
+              .catch(error => console.error('Error:', error))
+              .then(response => console.log('Success:', response));
+            
+            debugger
+          }
+
+          createCondition() {
+            const inputCreate = document.querySelector("#create").value
+
+            axios.post("http://localhost:3001/create", {
+                condition: inputCreate
+              })
+              .then(() => {
+                this.props.history.push('/translations')
+              })
+              .catch((err) => {
+                console.log(err)
+              })
+
+            // const inputCreate = document.querySelector("#create").value
+            // const send = {condition: inputCreate}
+
+            // console.log(e)
+            // console.log("In Create Condition")
+            
+            // if(!inputCreate) {
+            //     console.log("You haven't entered anything!")
+            // }
+            // else {
+            //     console.log(inputCreate)
+            // }
+            
+
+            // fetch("http://localhost:3001/create", {
+            //     method: 'POST',
+            //     body: inputCreate
+            //   })
+            
+            // debugger
+          }
         
+        //   handleSubmit(event){
+        //       event.preventDefault()
+        //       let data = new FormData(event.target)
+            
+
+        //     //   data
+        //       data.body.condition = document.querySelector("#condition").value
+
+        //       console.log("data is ")
+        //       console.log(data)
+
+        //       fetch("http://localhost:3001/create", {
+        //         method: 'POST',
+        //         body: data
+        //       })
+        //   }
 
     render() {
         return (
             <div>
                 <p>Condition: {this.state.response}</p>
-                <input type="text"></input>
-                <button onClick={() => this.createCondition()}>Create Condition</button>
-                <button onClick={() => this.updateCondition()}>Update Condition</button>
-                <button onClick={() => this.deleteCondition()}>Delete Condition</button>
-
+                {/* <form onSubmit={event => this.handleSubmit.bind(this)}>
+                    <input type="text" id="condition" name="condition"/>
+                    <button type="submit">Create Condition</button>
+                </form> */}
+                <form>
+                    <input type="text" id="create"></input>
+                    <button onClick={() => this.createCondition()}>Create Condition</button>
+                </form>
+                <form>
+                    <input type="text" id="update"></input>
+                    <button onClick={() => this.updateCondition()}>Update Condition</button>
+                </form>
+                <form>
+                    <input type="text" id="delete"></input>
+                    <button onClick={() => this.deleteCondition()}>Delete Condition</button>
+                </form>
             </div>
         //     <Router>
         //     <div>
@@ -145,3 +218,15 @@ class App extends Component {
 }
 
 export default App
+
+//   callApi = async () => {
+        //     const response = await fetch('http://localhost:3001/show');
+        //     const body = await response.json();
+        
+        //     if (response.status !== 200)
+        //     {
+        //         console.log(body.message);
+        //     }
+            
+        //     return body;
+        //   };

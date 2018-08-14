@@ -21,8 +21,26 @@ app.get('/', (req, res) => {
 //     res.send("This is show")
 //   })
 
-  app.get('/create', (req, res) => {
-    res.send("This is a create")
+  app.post('/create', (req, res) => {
+    console.log("This is in /create route")
+    console.log("req is")
+    console.log(req.body)
+    Conditions.create(req.body)
+      .then(data => {
+          data.save(err => {
+            console.log(err);
+            res.redirect("/show");
+        })
+      })
+    // Conditions.create(req.body.create)
+    //   .then(data => {
+    //     console.log(data)
+    //     res.json(data)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+    // res.redirect('/show')
   })
 
   app.get('/update', (req, res) => {
