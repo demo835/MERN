@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 
   app.post('/create', (req, res) => {
     console.log("This is in /create route")
-    console.log("req is")
+    console.log("req.body is")
     console.log(req.body)
     Conditions.create(req.body)
       .then(data => {
@@ -44,21 +44,23 @@ app.get('/', (req, res) => {
   })
 
   app.put('/update', (req, res) => {
-        var id = req.params.id;
-        console.log("The ID is...")
-        console.log(id);
-        Script.findById(id, function(err, doc) {
-            if (err) {
-            console.error("Error editing - no entry found with this Id");
-            res.redirect("/script")
-            }
-            doc.name = req.body.name;
-            doc.sport = req.body.sport;
-            doc.description = req.body.description;
-            doc.skeleton = req.body.skeleton;
-            doc.save();
+        // var id = req.params.id;
+        // console.log("The ID is...")
+        // console.log(id);
+        console.log("This is in /update route")
+        console.log("req.body is")
+        console.log(req.body)
+        Conditions.findOne()
+        .then(data => {
+          data.condition = req.body.condition;
+          console.log("req.body.condition is")
+          console.log(req.body.condition)
+            // doc.sport = req.body.sport;
+            // doc.description = req.body.description;
+            // doc.skeleton = req.body.skeleton;
+          data.save();
+          res.redirect('/show');
         })
-            res.redirect("/script");
     })
 
   app.delete('/delete', (req, res) => {

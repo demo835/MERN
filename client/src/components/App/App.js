@@ -6,7 +6,8 @@ class App extends Component {
         super()
 
         this.state = {
-            response: ""
+            response: "",
+            id: 0
           };
         }
 
@@ -55,6 +56,7 @@ class App extends Component {
                 //     items[i] = data[i]
                 // }
                 this.setState({response: data[0].condition})
+                this.setState({id: data[0]._id})
             })
 
             // this.callApi()
@@ -68,9 +70,10 @@ class App extends Component {
           
           updateCondition() {
             const inputCreate = document.querySelector("#update").value
+            const idUpdate = document.querySelector("#id").value
 
             axios.put("http://localhost:3001/update", {
-                condition: inputCreate
+                condition: inputCreate, _id: idUpdate, params: idUpdate
               })
               .then(() => {
                 this.props.history.push('/translations')
@@ -173,6 +176,7 @@ class App extends Component {
         return (
             <div>
                 <p>Condition: {this.state.response}</p>
+                <p id="id">ID: {this.state.id}</p>
                 {/* <form onSubmit={event => this.handleSubmit.bind(this)}>
                     <input type="text" id="condition" name="condition"/>
                     <button type="submit">Create Condition</button>
