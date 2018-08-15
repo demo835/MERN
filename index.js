@@ -6,12 +6,16 @@ const cors = require('cors')
 // const Conditions = mongoose.model('./db/model')
 const mongoose = require('./db/schema.js')
 const Conditions = mongoose.model('Conditions')
+const passport = require('./config/passport')()
+const userController = require('./controllers/users.js')
 
 const app = express()
 
 app.set('port', process.env.PORT || 3001)
 app.use(parser.json())
 app.use(cors())
+app.use(passport.initialize())
+app.use('/users', userController)
 
 app.get('/', (req, res) => {
     res.send("This is a test")
