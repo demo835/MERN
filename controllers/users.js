@@ -7,14 +7,16 @@ const mongoose = require('../db/User')
 const User = mongoose.model('User')
 
 router.post('/signup', (req, res) => {
-    if (req.body.email && req.body.password) {
+    if (req.body.email && req.body.password)
+    {
       let newUser = {
         email: req.body.email,
         password: req.body.password
-      }
+        }
       User.findOne({ email: req.body.email })
         .then((user) => {
-          if (!user) {
+          if (!user)
+          {
             User.create(newUser)
               .then(user => {
                 if (user) {
@@ -25,7 +27,9 @@ router.post('/signup', (req, res) => {
                   res.json({
                     token: token
                   })
-                } else {
+                //   res.redirect("/show")
+                }
+                else {
                   res.sendStatus(401)
                 }
               })
@@ -33,13 +37,18 @@ router.post('/signup', (req, res) => {
             res.sendStatus(401)
           }
         })
-    } else {
-      res.sendStatus(401)
+        // res.redirect("/show")
+    }
+    else 
+    {
+    //   res.sendStatus(401)
+      res.redirect('http://localhost:3001/users/signup')
     }
   })
 
-  router.post('/login', (req, res) => {
-    if (req.body.email && req.body.password) {
+  router.post('/signin', (req, res) => {
+    if (req.body.email && req.body.password)
+    {
       User.findOne({ email: req.body.email }).then(user => {
         if (user) {
           if (user.password === req.body.password) {
@@ -50,14 +59,21 @@ router.post('/signup', (req, res) => {
             res.json({
               token: token
             })
-          } else {
+            res.redirect("/show")
+          }
+          else
+          {
             res.sendStatus(401)
           }
-        } else {
+        }
+        else
+        {
           res.sendStatus(401)
         }
       })
-    } else {
+    }
+    else
+    {
       res.sendStatus(401)
     }
   })
