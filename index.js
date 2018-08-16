@@ -18,7 +18,7 @@ app.use(passport.initialize())
 app.use('/users', userController)
 
 app.get('/', (req, res) => {
-    res.send("This is a test")
+    res.redirect("/signin")
   })
 
 //   app.get('/show', (req, res) => {

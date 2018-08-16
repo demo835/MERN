@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
+import {
+  Route,
+  Switch
+} from 'react-router-dom'
 import axios from 'axios'
+import Profile from "../Profile/Profile"
+import SignIn from "../SignIn/SignIn"
 
 class App extends Component {
     constructor() {
@@ -60,11 +66,19 @@ class App extends Component {
           createCondition() {
             const inputCreate = document.querySelector("#create").value
 
+            // axios({
+            //   method: 'post',
+            //   url: "http://localhost:3001/create",
+            //   data: {
+            //   condition: inputCreate
+            //   },
+            //   config: { headers: {'Content-Type': 'application/json' }}
+            // })
             axios.post("http://localhost:3001/create", {
                 condition: inputCreate
               })
               .then(() => {
-                this.props.history.push('/translations')
+                // this.props.history.push('/translations')
               })
               .catch((err) => {
                 console.log(err)
@@ -73,26 +87,45 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <p>Condition: {this.state.response}</p>
-                <p id="id">ID: {this.state.id}</p>
-                {/* <form onSubmit={event => this.handleSubmit.bind(this)}>
-                    <input type="text" id="condition" name="condition"/>
-                    <button type="submit">Create Condition</button>
-                </form> */}
-                <form>
-                    <input type="text" id="create"></input>
-                    <button onClick={() => this.createCondition()}>Create Condition</button>
-                </form>
-                <form>
-                    <input type="text" id="update"></input>
-                    <button onClick={() => this.updateCondition()}>Update Condition</button>
-                </form>
-                <form>
-                    <input type="text" id="delete"></input>
-                    <button onClick={() => this.deleteCondition()}>Delete Condition</button>
-                </form>
-            </div>
+          <div>
+        {/* <NavBar isLoggedIn={this.state.isLoggedIn} /> */}
+        <div className='body'>
+          <Switch>
+            <Route path='/signin'
+              render={(props) => {
+                return (
+                  <SignIn isLoggedIn={this.state.isLoggedIn} handleInput={this.handleInput} handleSignUp={this.handleSignUp} />
+                )
+              }}
+            />
+            {/* <Route path='/logout'
+              render={(props) => {
+                return (
+                  <LogOut isLoggedIn={this.state.isLoggedIn} handleLogOut={this.handleLogOut} />
+                )
+              }}
+            />
+            <Route path='/login'
+              render={(props) => {
+                return (
+                  <LogInForm isLoggedIn={this.state.isLoggedIn} handleInput={this.handleInput} handleLogIn={this.handleLogIn} />
+                )
+              }}
+            /> */}
+            <Route
+              path='/'
+              render={() => {
+                return (
+                  <Profile response={this.state.response} id={this.state.id} createCondition={this.createCondition.bind(this)} updateCondition={this.updateCondition.bind(this)} deleteCondition={this.deleteCondition.bind(this)}/>
+                )
+              }}
+            />
+          </Switch>
+        </div>
+      </div>
+          // <div>
+          //   <Profile response={this.state.response} id={this.state.id} createCondition={this.createCondition.bind(this)} updateCondition={this.updateCondition.bind(this)} deleteCondition={this.deleteCondition.bind(this)}/>
+          // </div>
         )
     }
 }
