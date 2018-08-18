@@ -24,10 +24,11 @@ router.post('/signup', (req, res) => {
                     id: newUser.id
                   }
                   var token = jwt.encode(payload, config.jwtSecret)
-                  res.json({
-                    token: token
-                  })
-                //   res.redirect("/show")
+                //   res.json({
+                //     token: token
+                //   })
+                //   res.redirect(`/user/show?token=${token}`);
+                res.redirect("/show")
                 }
                 else {
                   res.sendStatus(401)
@@ -44,6 +45,10 @@ router.post('/signup', (req, res) => {
     //   res.sendStatus(401)
       res.redirect('http://localhost:3001/users/signup')
     }
+  })
+
+  router.get('/user/show?token=$*', (req, res) => {
+      res.redirect("/show")
   })
 
   router.post('/signin', (req, res) => {

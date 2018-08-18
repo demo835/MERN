@@ -16,8 +16,19 @@ body {
     background: royalblue;
 }
 
+/* #background {
+    z-index: -1;
+    display: inline;
+} */
+/* #page-container {
+    background: url("../../../public/images/beach-children-family.jpg");
+    background-size: 1600px 800px;
+    background-position-x: 0;
+    background-position-y: 0;
+} */
+
 #login-page {
-   width: 500px;
+    width: 500px;
    /* background-color: white;
    padding: 30px; */
 }

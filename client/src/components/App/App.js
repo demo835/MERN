@@ -8,6 +8,7 @@ import Profile from "../Profile/Profile"
 import SignIn from "../SignIn/SignIn"
 import LogOut from "../LogOut/LogOut"
 import SignUpForm from "../SignUpForm/SignUpForm"
+import NavBar from "../NavBar/NavBar"
 
 class App extends Component {
     constructor() {
@@ -152,47 +153,47 @@ class App extends Component {
     render() {
         return (
           <div>
-        {/* <NavBar isLoggedIn={this.state.isLoggedIn} /> */}
-        <div className='body'>
-          <Switch>
-            <Route path='/signin'
-              render={(props) => {
-                return (
-                  <SignIn isLoggedIn={this.state.isLoggedIn} handleInput={this.handleInput.bind(this)} handleSignUp={this.handleSignUp.bind(this)} />
-                )
-              }}
-            />
-            <Route path='/signup'
-              render={(props) => {
-                return (
-                  <SignUpForm isLoggedIn={this.state.isLoggedIn} handleInput={this.handleInput.bind(this)} handleSignUp={this.handleSignUp.bind(this)} />
-                )
-              }}
-            />
-            {/* <Route path='/logout'
-              render={(props) => {
-                return (
-                  <LogOut isLoggedIn={this.state.isLoggedIn} handleLogOut={this.handleLogOut} />
-                )
-              }}
-            />
-            <Route path='/login'
-              render={(props) => {
-                return (
-                  <LogInForm isLoggedIn={this.state.isLoggedIn} handleInput={this.handleInput} handleLogIn={this.handleLogIn} />
-                )
-              }}
-            /> */}
-            <Route
-              path='/'
-              render={() => {
-                return (
-                  <Profile response={this.state.response} id={this.state.id} createCondition={this.createCondition.bind(this)} updateCondition={this.updateCondition.bind(this)} deleteCondition={this.deleteCondition.bind(this)}/>
-                )
-              }}
-            />
-          </Switch>
-        </div>
+        <NavBar isLoggedIn={this.state.isLoggedIn} />
+          <div className='body'>
+            <Switch>
+              <Route path='/signin'
+                render={(props) => {
+                  return (
+                    <SignIn isLoggedIn={this.state.isLoggedIn} handleInput={this.handleInput.bind(this)} handleSignUp={this.handleSignUp.bind(this)} />
+                  )
+                }}
+              />
+              <Route path='/signup'
+                render={(props) => {
+                  return (
+                    <SignUpForm isLoggedIn={this.state.isLoggedIn} handleInput={this.handleInput.bind(this)} handleSignUp={this.handleSignUp.bind(this)} />
+                  )
+                }}
+              />
+              {/* <Route path='/logout'
+                render={(props) => {
+                  return (
+                    <LogOut isLoggedIn={this.state.isLoggedIn} handleLogOut={this.handleLogOut} />
+                  )
+                }}
+              />
+              <Route path='/login'
+                render={(props) => {
+                  return (
+                    <LogInForm isLoggedIn={this.state.isLoggedIn} handleInput={this.handleInput} handleLogIn={this.handleLogIn} />
+                  )
+                }}
+              /> */}
+              <Route
+                path='/'
+                render={() => {
+                  return (
+                    <Profile response={this.state.response} id={this.state.id} createCondition={this.createCondition.bind(this)} updateCondition={this.updateCondition.bind(this)} deleteCondition={this.deleteCondition.bind(this)}/>
+                  )
+                }}
+              />
+            </Switch>
+          </div>
       </div>
           // <div>
           //   <Profile response={this.state.response} id={this.state.id} createCondition={this.createCondition.bind(this)} updateCondition={this.updateCondition.bind(this)} deleteCondition={this.deleteCondition.bind(this)}/>
